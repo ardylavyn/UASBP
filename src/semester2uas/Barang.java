@@ -8,7 +8,7 @@ public class Barang {
     public String getNama(){
         return nama;
     }
-    public int getHarga(){
+    public int getharga(){
         return harga;
     }
 }
