@@ -2,6 +2,7 @@
 package FinalProjectUAS;
 import java.util.Scanner;
 public class appToko {
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         cBarang brg1 = new cBarang("Tas", 100000);
@@ -57,11 +58,20 @@ public class appToko {
                                 beli.tambahTransaksi(br);
                                 break;
                             case 2 :
+                                //hapus transaksi
+                                beli.lihatTransaksi();
+                                System.out.print("Hapus Nomor = ");
+                                int hapus = sc.nextInt( );
+                                beli.hapusTransaksi(hapus);
                                 break;
                             case 3 :
                                 beli.lihatTransaksi();
                                 break;
                             case 4 :
+                                //selesi. sambungkan transaksi pembeli
+                                //ke antrian toko
+                                jual.sambungTransaksi(beli.getFront(), beli.getRear());
+                                System.out.println("Selamat datang kembali..");
                                 break;                                
                         }
                     }while(pilih2!=4);
@@ -71,15 +81,42 @@ public class appToko {
                     break;
                 case 3:
                     //admin
+                    jual.lihatTransaksi();
+                    //memproses tiap transaksi yang belum diproses
+                    cTransaksi t= jual.getFront();
+                    do{
+                        if (t.getStatus()==0) {
+                            System.out.println("Kode    : "+t.getKode());
+                            System.out.println("Pembeli : "+t.getPembeli());
+                            System.out.println("Barang  : "+t.getBarang().getNama());
+                            System.out.println("Jumlah  : "+t.getJumlah());
+                            System.out.println("Pilih Aksi-");
+                            System.out.println("1. Diproses");
+                            System.out.println("2. Selesai");
+                            System.out.print("Pilih = ");
+                            int aksi=sc.nextInt();
+                            if (aksi==1) {
+                                jual.prosesTransaksi(t);
+                                System.out.println("Berhasil diproses....");
+                            }
+                            else{
+                                break;
+                            }
+                        }
+                        t=t.next;
+                   }while(t!=null);
                     break;
                 case 4:
                     //pemilik
+                    //melihat embelian yang sudah dproses
+                    System.out.println("Transaksi Diproses : "+jual.lihatDiproses());
+                    System.out.println("Pemasukan          : "+jual.lihatPemasukan());
                     break;
                 case 5:
                     //exit
+                    System.out.println("Terimakasih....");
                     break;                    
             }
         }while(pilih!=5);
     }
-
 }
