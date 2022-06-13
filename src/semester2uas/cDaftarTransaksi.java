@@ -1,4 +1,3 @@
-
 package FinalProjectUAS;
 
 public class cDaftarTransaksi {
@@ -112,6 +111,10 @@ public class cDaftarTransaksi {
         //cek member
         t.setStatus(1);
     }
+    
+    public void belumTransaksi(cTransaksi t){
+        t.setStatus(0);
+    }
     public void prosesTransaksiMember(cTransaksi t){
         //mendapatkan diskon
     }
@@ -125,6 +128,18 @@ public class cDaftarTransaksi {
         }
         return proses;
      }
+    
+    public int sedangDiproses(){
+        cTransaksi t=front;
+        int proses=0;
+        for (;t!=null; t=t.next) {
+            if (t.getStatus()==0) {
+                proses++;
+            }
+        }
+        return proses;
+     }
+    
     public double lihatPemasukan(){
         cTransaksi t=front;
         double nominal=0;
@@ -140,5 +155,21 @@ public class cDaftarTransaksi {
         }
         return nominal;
     }
+    
+    public double lihatPemasukan2(){
+        cTransaksi t=front;
+        double nominal=0;
+        for (;t!=null; t=t.next) {
+            if (t.getStatus()==0) {
+                //cek memberberdasarkan data nama/kode pembeli
+                nominal=nominal+t.getBarang().getHarga()*t.getJumlah();
+                if (t.getPembeli().compareToIgnoreCase("111")==0) {
+                    System.out.println("Member!");
+                    nominal=nominal-(0.1*nominal);
+                }
+             }
+        }
+        return nominal;
+    }
+    
 }
-        
