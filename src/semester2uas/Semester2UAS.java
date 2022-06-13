@@ -8,12 +8,15 @@ public class appToko {
         //daftar barang yang dijual
         cBarang brg1 = new cBarang("Tas", 100000);
         cBarang brg2 = new cBarang("Sandal", 150000);
-        cBarang brg3 = new cBarang("Sepatu", 200000); 
+        cBarang brg3 = new cBarang("Sepatu", 200000);  
         //data member toko
         int id1 = 111, pwd1 = 123;
         int id2 = 112, pwd2 = 1234;
         int id3 = 113, pwd3 = 1235;
-        int id, pin;
+        int id, pin, pin2;
+        int confirm;
+        String ya = null;
+        String tidak;
         //daftar antrian transaksi yang masuk toko
         cDaftarTransaksi jual = new cDaftarTransaksi();
         int pilih=0, pilih2=0,pilih3=0;
@@ -101,9 +104,77 @@ public class appToko {
                             valid=true;
                         }
                         if(valid==false) {
+                            int pb = 0;
                             System.out.println("PIN/ID salah!");
+                            System.out.println("Ubah Password? Ya(1)/tidak(2)");
+                            System.out.print("Pilih = ");
+                            confirm=sc.nextInt();
+                            if(confirm==1) {
+                                boolean benar=false;
+                                do {
+                                    System.out.print("Masukkan ID kembali = ");
+                                    id=sc.nextInt();
+                                    if (id==id1) {
+                                        benar=true;
+                                        System.out.print("Masukkan PIN lama = ");
+                                        pin=sc.nextInt();
+                                        if(pin!=pwd1) {
+                                            System.out.println("Anda salah memasukkan PIN lama");
+                                        }
+                                        if (pin==pwd1) {
+                                            System.out.print("Masukkan PIN baru = ");
+                                            pin2 = sc.nextInt();
+                                            pb=pin2;
+                                        }
+                                    }
+                                    else if(id==id2){
+                                        benar=true;
+                                        System.out.print("Masukkan PIN lama = ");
+                                        pin=sc.nextInt();
+                                        if(pin!=pwd2) {
+                                            System.out.println("Anda salah memasukkan PIN lama");
+                                        }
+                                        if (pin==pwd2) {
+                                            System.out.print("Masukkan PIN baru = ");
+                                            pin2 = sc.nextInt();
+                                            pb=pin2;
+                                        }
+                                    }
+                                    else if(id==id3){
+                                        benar=true;
+                                        System.out.print("Masukkan PIN lama = ");
+                                        pin=sc.nextInt();
+                                        if(pin!=pwd3) {
+                                            System.out.println("Anda salah memasukkan PIN lama");
+                                        }
+                                        if (pin==pwd3) {
+                                            System.out.print("Masukkan PIN baru = ");
+                                            pin2 = sc.nextInt();
+                                            pb=pin2;
+                                        }
+                                    }
+                                    System.out.println("Mohon masukkan data baru");
+                                    do {
+                                        System.out.print("ID  = ");
+                                        id=sc.nextInt();
+                                        System.out.print("PIN = ");
+                                        pin=sc.nextInt();
+                                        if(id==id1 && pin==pb) {
+                                            valid=true;
+                                        }
+                                        else if(id==id2 && pin==pb){
+                                            valid=true;
+                                        }
+                                        else if(id==id3 && pin==pb){
+                                            valid=true;
+                                        }
+                                    } while (valid==false);  
+                                } while (benar=false);
+                            }
+                            else if(confirm==2){
+                                System.out.println("Baiklah...");
+                            }   
                         }
-                        else break;
                     } while(valid==false);
                     if (valid==true) {
                         System.out.println("Selamat Datang...");
