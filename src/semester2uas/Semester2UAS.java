@@ -1,19 +1,22 @@
-
 package FinalProjectUAS;
+import java.io.*;
 import java.util.Scanner;
 public class appToko {
     
-    public static void main(String[] args) {
+    public static void main(String[] args)throws Exception {
+         String usr, psw,lg, my_user,my_password;;
+         BufferedReader pw = new BufferedReader (new InputStreamReader (System.in));
         Scanner sc = new Scanner(System.in);
         //daftar barang yang dijual
-        cBarang brg1 = new cBarang("Tas", 100000);
-        cBarang brg2 = new cBarang("Sandal", 150000);
-        cBarang brg3 = new cBarang("Sepatu", 200000);  
+        cBarang brg1 = new cBarang("Baby Bathup", 100000);
+        cBarang brg2 = new cBarang("Stroller", 150000);
+        cBarang brg3 = new cBarang("Playmat", 200000);
         //data member toko
         int id1 = 111, pwd1 = 123;
         int id2 = 112, pwd2 = 1234;
         int id3 = 113, pwd3 = 1235;
         int id, pin, pin2;
+        int passOwn=12345;
         int confirm;
         String ya = null;
         String tidak;
@@ -23,11 +26,11 @@ public class appToko {
         int kode=100,jumlah;
         do{
             System.out.println("\nAplikasi Toko Maju Sejahtera");
-            System.out.println("1.Pembeli");
-            System.out.println("2.Anggota");
-            System.out.println("3.Admin");
-            System.out.println("4.Pemilik");  
-            System.out.println("5.Exit");  
+            System.out.println("1. Pembeli");
+            System.out.println("2. Anggota");
+            System.out.println("3. Admin");
+            System.out.println("4. Pemilik");  
+            System.out.println("5. Exit");  
             System.out.print("Pilih = ");
             pilih = sc.nextInt();
             switch(pilih){
@@ -49,12 +52,12 @@ public class appToko {
                             case 1 :
                                 cTransaksi br = null;
                                 System.out.println("Daftar Barang");
-                                System.out.println("1.Tas");
-                                System.out.println("2.Sandal");
-                                System.out.println("3.Sepatu");   
-                                System.out.print("Pilih = ");
+                                System.out.println("1. Baby Bathup  [Rp. 100.000]");
+                                System.out.println("2. Stroller     [Rp. 150.000]");
+                                System.out.println("3. Playmat      [Rp. 200.000]"); 
+                                System.out.print("Pilih     = ");
                                 pilih3 = sc.nextInt();
-                                System.out.print("Jumlah = ");
+                                System.out.print("Jumlah    = ");
                                 jumlah =  sc.nextInt();
                                 if (pilih3==1) {
                                     br = new cTransaksi(String.valueOf(kode), nama,brg1,  jumlah, 0);
@@ -105,14 +108,14 @@ public class appToko {
                         }
                         if(valid==false) {
                             int pb = 0;
-                            System.out.println("PIN/ID salah!");
+                            System.out.println("  **PIN/ID salah!**");
                             System.out.println("Ubah Password? Ya(1)/tidak(2)");
                             System.out.print("Pilih = ");
                             confirm=sc.nextInt();
                             if(confirm==1) {
                                 boolean benar=false;
                                 do {
-                                    System.out.print("Masukkan ID kembali = ");
+                                    System.out.print("Masukkan ID kembali   = ");
                                     id=sc.nextInt();
                                     if (id==id1) {
                                         benar=true;
@@ -182,19 +185,19 @@ public class appToko {
                         beli = new cDaftarTransaksi();
                         do{
                             System.out.println("Akun Member");
-                            System.out.println("1.Tambah");
-                            System.out.println("2.Hapus");
-                            System.out.println("3.Lihat");
-                            System.out.println("4.Kembali");
+                            System.out.println("1. Tambah");
+                            System.out.println("2. Hapus");
+                            System.out.println("3. Lihat");
+                            System.out.println("4. Kembali");
                             System.out.print("Pilih = ");
                             pilih2 = sc.nextInt();
                             switch(pilih2){
                                 case 1 :
                                     cTransaksi br = null;
                                     System.out.println("Daftar Barang");
-                                    System.out.println("1.Tas");
-                                    System.out.println("2.Sandal");
-                                    System.out.println("3.Sepatu");   
+                                    System.out.println("1. Baby Bathup  [Rp. 100.000]");
+                                    System.out.println("2. Stroller     [Rp. 150.000]");
+                                    System.out.println("3. Playmat      [Rp. 200.000]");    
                                     System.out.print("Pilih = ");
                                     pilih3 = sc.nextInt();
                                     System.out.print("Jumlah = ");
@@ -233,7 +236,29 @@ public class appToko {
                     }
                     break;
                 case 3:
-                    //admin
+                   // instance of class
+                    Login user1= new Login();
+                    System.out.print("Masukan password = "); my_password=pw.readLine();
+                    if( my_password.equals(user1.getPassword()))
+                {
+            System.out.println("=================================");
+            System.out.println("      *** Login Sukses ***");
+            System.out.println("    Selamat Datang "+user1.getNama());
+            System.out.println("=================================");
+              }
+              else
+              {
+            System.out.println("=================================");
+            System.out.println("       *** Login Gagal***");
+            System.out.println("=================================");
+            do{
+             System.out.println("=============LOGIN===============");
+             System.out.print("Masukan password = "); my_password=pw.readLine();
+             System.out.println("=================================");
+            }while(my_password.equals(user1.getPassword()));
+              }  
+          
+        
                     jual.lihatTransaksi();
                     //memproses tiap transaksi yang belum diproses
                     cTransaksi t= jual.getFront();
@@ -252,6 +277,11 @@ public class appToko {
                                 jual.prosesTransaksi(t);
                                 System.out.println("Berhasil diproses....");
                             }
+                            else if (aksi==2){
+                               jual.belumTransaksi(t);
+                               System.out.println("Barang belum selesai diproses...");
+                               
+                            }
                             else{
                                 break;
                             }
@@ -262,9 +292,42 @@ public class appToko {
                 case 4:
                     //pemilik
                     //melihat pembelian yang sudah dproses
-                    System.out.println("Akun Pemilik");
-                    System.out.println("Transaksi Diproses : "+jual.lihatDiproses());
+                     boolean pass=false;
+                    do {
+                        System.out.print("PIN = ");
+                        pin=sc.nextInt();
+                        if(pin==passOwn) {
+                            pass=true;
+                        }
+                        else if(pass==false) {
+                            System.out.println("PIN salah!");
+                        }
+                        else {
+                            break;
+                        }
+                    } while(pass==false);
+                   int opsi1=0;
+                    do {
+                        System.out.println("Pilih Transaksi");
+                        System.out.println("1. Selesai Diproses");
+                        System.out.println("2. Belum Diproses");
+                        System.out.println("3. Exit");
+                        System.out.print("Pilih : ");
+                        opsi1=sc.nextInt();
+                        switch(opsi1){
+                            case 1:
+                    System.out.println("=========================");
+                    System.out.println("Selesai Diproses : "+jual.lihatDiproses());
                     System.out.println("Pemasukan          : "+jual.lihatPemasukan());
+                                break;
+                            case 2:
+                    System.out.println("=========================");
+                    System.out.println("Belum Diproses : "+jual.sedangDiproses());
+                    System.out.println("Pemasukan          : "+jual.lihatPemasukan2());
+                        break;
+                     }     
+                    } while (opsi1!=3);
+                    
                     break;
                 case 5:
                     //exit
