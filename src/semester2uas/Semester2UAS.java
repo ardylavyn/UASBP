@@ -1,11 +1,10 @@
-package FinalProjectUAS;
+package project_uas;
 import java.io.*;
 import java.util.Scanner;
 public class appToko {
-    
-    public static void main(String[] args)throws Exception {
-         String usr, psw,lg, my_user,my_password;;
-         BufferedReader pw = new BufferedReader (new InputStreamReader (System.in));
+    public static void main(String[] args) throws IOException {
+        String usr, psw,lg, my_user,my_password;;
+        BufferedReader pw = new BufferedReader (new InputStreamReader (System.in));
         Scanner sc = new Scanner(System.in);
         //daftar barang yang dijual
         cBarang brg1 = new cBarang("Baby Bathup", 100000);
@@ -121,10 +120,10 @@ public class appToko {
                                         benar=true;
                                         System.out.print("Masukkan PIN lama = ");
                                         pin=sc.nextInt();
-                                        if(pin!=pwd1) {
+                                        if(pin!=pin) {
                                             System.out.println("Anda salah memasukkan PIN lama");
                                         }
-                                        if (pin==pwd1) {
+                                        if (pin==pin) {
                                             System.out.print("Masukkan PIN baru = ");
                                             pin2 = sc.nextInt();
                                             pb=pin2;
@@ -134,10 +133,10 @@ public class appToko {
                                         benar=true;
                                         System.out.print("Masukkan PIN lama = ");
                                         pin=sc.nextInt();
-                                        if(pin!=pwd2) {
+                                        if(pin!=pin) {
                                             System.out.println("Anda salah memasukkan PIN lama");
                                         }
-                                        if (pin==pwd2) {
+                                        if (pin==pin) {
                                             System.out.print("Masukkan PIN baru = ");
                                             pin2 = sc.nextInt();
                                             pb=pin2;
@@ -147,10 +146,10 @@ public class appToko {
                                         benar=true;
                                         System.out.print("Masukkan PIN lama = ");
                                         pin=sc.nextInt();
-                                        if(pin!=pwd3) {
+                                        if(pin!=pin) {
                                             System.out.println("Anda salah memasukkan PIN lama");
                                         }
-                                        if (pin==pwd3) {
+                                        if (pin==pin) {
                                             System.out.print("Masukkan PIN baru = ");
                                             pin2 = sc.nextInt();
                                             pb=pin2;
@@ -237,7 +236,7 @@ public class appToko {
                     break;
                 case 3:
                    // instance of class
-                    Login user1= new Login();
+                    cLogin user1= new cLogin();
                     System.out.print("Masukan password = "); my_password=pw.readLine();
                     if( my_password.equals(user1.getPassword()))
                 {
@@ -257,8 +256,6 @@ public class appToko {
              System.out.println("=================================");
             }while(my_password.equals(user1.getPassword()));
               }  
-          
-        
                     jual.lihatTransaksi();
                     //memproses tiap transaksi yang belum diproses
                     cTransaksi t= jual.getFront();
@@ -316,15 +313,17 @@ public class appToko {
                         opsi1=sc.nextInt();
                         switch(opsi1){
                             case 1:
-                    System.out.println("=========================");
-                    System.out.println("Selesai Diproses : "+jual.lihatDiproses());
-                    System.out.println("Pemasukan          : "+jual.lihatPemasukan());
+                                System.out.println("Selesai Diproses : "+jual.lihatDiproses());
+                                System.out.println("\nPemasukan          : "+jual.lihatPemasukan());
+                                System.out.println("*nb = Pelanggan yang berupa angka mendapat diskon 5%");
+                                System.out.println("");
                                 break;
                             case 2:
-                    System.out.println("=========================");
-                    System.out.println("Belum Diproses : "+jual.sedangDiproses());
-                    System.out.println("Pemasukan          : "+jual.lihatPemasukan2());
-                        break;
+                                System.out.println("Belum Diproses : "+jual.sedangDiproses());
+                                System.out.println("\nPemasukan          : "+jual.lihatPemasukan2());
+                                System.out.println("*nb = Pelanggan yang berupa angka mendapat diskon 5%");
+                                System.out.println("");
+                                break;
                      }     
                     } while (opsi1!=3);
                     
@@ -335,5 +334,5 @@ public class appToko {
                     break;                    
             }
         }while(pilih!=5);
-    }
+    }    
 }
