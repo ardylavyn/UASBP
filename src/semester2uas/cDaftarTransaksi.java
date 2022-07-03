@@ -1,5 +1,4 @@
-package FinalProjectUAS;
-
+package project_uas;
 public class cDaftarTransaksi {
     //depan dan belakang
     //depan untuk eksekusi
@@ -54,10 +53,10 @@ public class cDaftarTransaksi {
             i++;
             total=total+(t.getBarang().getHarga()*t.getJumlah());
         }
-        System.out.println("Mendapatkan diskon 10%");
+        System.out.println("Mendapatkan diskon 5%");
         System.out.println("Total Belanja : "+total);
-        System.out.println("Diskon        : "+(0.1*total));
-        System.out.println("Biaya Akhir   : "+(total-(0.1*total)));
+        System.out.println("Diskon        : "+(0.05*total));
+        System.out.println("Biaya Akhir   : "+(total-(0.05*total)));
         System.out.println("");
     }
     public void hapusTransaksi(int nomor){
@@ -141,35 +140,56 @@ public class cDaftarTransaksi {
      }
     
     public double lihatPemasukan(){
-        cTransaksi t=front;
-        double nominal=0;
-        for (;t!=null; t=t.next) {
+        int i=1;
+        double harga=0, total1=0;
+        System.out.println("=======================================================================");
+        System.out.println("\t\tDAFTAR TRANSAKSI SUDAH DIPROSES\t\t");
+        System.out.println("=======================================================================");
+        System.out.println("No. \tKODE \tPEMBELI \tBARANG \t\tJUMLAH \tHARGA \t\t\tSTATUS");
+        System.out.println("=======================================================================");
+        for (cTransaksi t=front; t!=null; t=t.next) {
             if (t.getStatus()==1) {
-                //cek memberberdasarkan data nama/kode pembeli
-                nominal=nominal+t.getBarang().getHarga()*t.getJumlah();
-                if (t.getPembeli().compareToIgnoreCase("111")==0) {
-                    System.out.println("Member!");
-                    nominal=nominal-(0.1*nominal);
+                System.out.print(i+".");
+                System.out.print("\t"+t.getKode()+"\t");
+                System.out.print(t.getPembeli()+"\t ");
+                System.out.print(t.getBarang().getNama()+"\t");
+                System.out.print(t.getJumlah()+"\t");
+                System.out.print(t.getBarang().getHarga()+"(Disc 5%)\t\t");
+                System.out.println(t.getStatus());
+                i++;
+                total1=total1+(t.getBarang().getHarga()*t.getJumlah());
+                if (t.getPembeli().compareToIgnoreCase("111")==0 || t.getPembeli().compareToIgnoreCase("112")==0 || t.getPembeli().compareToIgnoreCase("113")==0) {
+                    total1=total1-(0.05*total1);
                 }
-             }
-        }
-        return nominal;
+            }
+        }  
+        return total1;
     }
     
     public double lihatPemasukan2(){
-        cTransaksi t=front;
-        double nominal=0;
-        for (;t!=null; t=t.next) {
+        int i=1;
+        double harga=0, total1=0;
+        System.out.println("=======================================================================");
+        System.out.println("\t\tDAFTAR TRANSAKSI BELUM DIPROSES\t\t");
+        System.out.println("=======================================================================");
+        System.out.println("No. \tKODE \tPEMBELI \tBARANG \t\tJUMLAH \tHARGA \t\t\tSTATUS");
+        System.out.println("=======================================================================");
+        for (cTransaksi t=front; t!=null; t=t.next) {
             if (t.getStatus()==0) {
-                //cek memberberdasarkan data nama/kode pembeli
-                nominal=nominal+t.getBarang().getHarga()*t.getJumlah();
-                if (t.getPembeli().compareToIgnoreCase("111")==0) {
-                    System.out.println("Member!");
-                    nominal=nominal-(0.1*nominal);
+                System.out.print(i+".");
+                System.out.print("\t"+t.getKode()+"\t");
+                System.out.print(t.getPembeli()+"\t ");
+                System.out.print(t.getBarang().getNama()+"\t");
+                System.out.print(t.getJumlah()+"\t");
+                System.out.print(t.getBarang().getHarga()+"\t\t");
+                System.out.println(t.getStatus());
+                i++;
+                total1=total1+(t.getBarang().getHarga()*t.getJumlah());
+                if (t.getPembeli().compareToIgnoreCase("111")==0 || t.getPembeli().compareToIgnoreCase("112")==0 || t.getPembeli().compareToIgnoreCase("113")==0) {
+                    total1=total1-(0.05*total1);
                 }
-             }
-        }
-        return nominal;
+            }
+        }  
+        return total1;
     }
-    
 }
